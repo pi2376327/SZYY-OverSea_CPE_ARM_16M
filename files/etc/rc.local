@@ -5,8 +5,7 @@
 ipset create chnroute hash:net
 ipset restore -f /root/script/chnroute-ipset
 
-#关闭bird开机启动
-#/etc/init.d/bird stop
-#/etc/init.d/bird disable
+#start rtty-client
+/etc/init.d/rtty start
 
 exit 0
