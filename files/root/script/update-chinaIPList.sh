@@ -49,6 +49,7 @@ else
         echo "add chnroute 172.16.0.0/12" >> /root/script/chnroute-ipset
         echo "add chnroute 192.168.0.0/16" >> /root/script/chnroute-ipset
         echo "add chnroute 100.64.0.0/10" >> /root/script/chnroute-ipset
+        echo "add chnroute 119.29.29.29/32" >> /root/script/chnroute-ipset
         if ! is_private_ip "$ips"; then
                 echo "add chnroute $ips" >> /root/script/chnroute-ipset
                 echo "$DATE: Add $ips,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,100.64.0.0/10 to the chnroute seccessfully" >> /root/script/update-ip.log
