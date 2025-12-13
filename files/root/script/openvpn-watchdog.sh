@@ -46,7 +46,7 @@ if ! exist_tun0;then
 else             
     #check gateway of vpn
     tries=0
-    gw=$(ip addr show tun0 | grep 'inet ' | cut -d' ' -f6 | cut -d'.' -f1-3).1
+    gw=$(ip addr show tun0 | grep 'inet ' | cut -d' ' -f6 | cut -d'.' -f1-2).0.1
     echo  $DATE: Start to check gateway of vpn-tun0
     echo  $DATE: Start to check gateway of vpn-tun0 >>/root/script/openvpn_watchdog.log
     while [[ $tries -lt 5 ]]
