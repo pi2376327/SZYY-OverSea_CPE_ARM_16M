@@ -12,24 +12,24 @@ ip rule add from all fwmark 1 table 100
 #check and add rules of mangle     
 iptables -t mangle -C PREROUTING -m set ! --match-set chnroute dst -j MARK --set-mark 1
 if [ $? = 0 ]; then
-        echo "$DATE: The PREROUTING of mangle rules alread exist" 
+        echo "$DATE: The PREROUTING of mangle rules already exist"  >>/root/script/ovpn-script.log
         iptables -t mangle -C OUTPUT -m set ! --match-set chnroute dst -j MARK --set-mark 1
         if [ $? = 0 ]; then
-                echo "$DATE: The OUTPUT of mangle rules alread exist"
+                echo "$DATE: The OUTPUT of mangle rules already exist" >>/root/script/ovpn-script.log
         else
                 iptables -t mangle -I OUTPUT -m set ! --match-set chnroute dst -j MARK --set-mark 1
-                echo "$DATE: Add OUTPUT of mangle rules"
+                echo "$DATE: Add OUTPUT of mangle rules" >>/root/script/ovpn-script.log
         fi
 else
         iptables -t mangle -I PREROUTING -m set ! --match-set chnroute dst -j MARK --set-mark 1
-        echo "$DATE: Add PREROUTING of mangle rules"
+        echo "$DATE: Add PREROUTING of mangle rules" >>/root/script/ovpn-script.log
 
         iptables -t mangle -C OUTPUT -m set ! --match-set chnroute dst -j MARK --set-mark 1
         if [ $? = 0 ]; then
-                echo "$DATE: The OUTPUT rules of mangle alread exist"
+                echo "$DATE: The OUTPUT rules of mangle already exist" >>/root/script/ovpn-script.log
         else
                 iptables -t mangle -I OUTPUT -m set ! --match-set chnroute dst -j MARK --set-mark 1
-                echo "$DATE: Add OUTPUT of mangle rules"
+                echo "$DATE: Add OUTPUT of mangle rules" >>/root/script/ovpn-script.log
         fi
 fi
 
@@ -62,4 +62,4 @@ else
         echo "$DATE: The $ips is a private ip address" >>/root/script/ovpn-script.log
 fi
 
-echo "$DATE: Openvpn-client startup" >>/root/script/ovpn-script.log
+echo "$DATE: Openvpn-client startup"
