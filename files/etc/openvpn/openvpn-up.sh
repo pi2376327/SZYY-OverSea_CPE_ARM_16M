@@ -61,3 +61,5 @@ if ! is_private_ip "$ips"; then
 else
         echo "$DATE: The $ips is a private ip address" >>/root/script/ovpn-script.log
 fi
+
+echo "$DATE: Openvpn-client startup"
