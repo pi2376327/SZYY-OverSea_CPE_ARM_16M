@@ -38,26 +38,26 @@ iwan=$(ip route show 1/0 | cut -d' ' -f5)
 ips=$(ip addr show $iwan | grep 'inet ' | cut -d' ' -f6 | cut -d'/' -f1)
 
 is_private_ip() {
-    ip="$1"
-    IFS='.' read -r i1 i2 i3 i4 <<EOF
+        ip="$1"
+        IFS='.' read -r i1 i2 i3 i4 <<EOF
 $ip
 EOF
-    if [ "$i1" -eq 10 ]; then
-        return 0
-    elif [ "$i1" -eq 192 ] && [ "$i2" -eq 168 ]; then
-        return 0
-    elif [ "$i1" -eq 172 ] && [ "$i2" -ge 16 ] && [ "$i2" -le 31 ]; then
-        return 0
-    elif [ "$i1" -eq 100 ] && [ "$i2" -ge 64 ] && [ "$i2" -le 127 ]; then
-        return 0
-    else
-        return 1
-    fi
+        if [ "$i1" -eq 10 ]; then
+                return 0
+        elif [ "$i1" -eq 192 ] && [ "$i2" -eq 168 ]; then
+                return 0
+        elif [ "$i1" -eq 172 ] && [ "$i2" -ge 16 ] && [ "$i2" -le 31 ]; then
+                return 0
+        elif [ "$i1" -eq 100 ] && [ "$i2" -ge 64 ] && [ "$i2" -le 127 ]; then
+                return 0
+        else
+                return 1
+        fi
 }
 
 if ! is_private_ip "$ips"; then
-    echo "add chnroute $ips" >> /root/script/chnroute-ipset
-    echo "Add $ips to the chnroute seccessfully" >>/root/script/ovpn-script.log
+        echo "add chnroute $ips" >> /root/script/chnroute-ipset
+        echo "$DATE: Add $ips to the chnroute seccessfully" >>/root/script/ovpn-script.log
 else
-    echo "The $ips is a private ip address" >>/root/script/ovpn-script.log
+        echo "$DATE: The $ips is a private ip address" >>/root/script/ovpn-script.log
 fi
