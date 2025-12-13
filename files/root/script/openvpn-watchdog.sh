@@ -46,6 +46,7 @@ else
         if /bin/ping -c 1 $gw >/dev/null
         then
                 echo $DATE: Ovpn gateway is reachable >> /root/script/ovpn-watchdog.log
+                exit 0
         fi
         tries=$((tries+1))
         sleep 10
